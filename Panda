@@ -1,0 +1,88 @@
+import pandas as pd
+
+# 01. Ler arquivo CSV
+
+try:
+    df = pd.read_csv('dados.csv')
+    print("📄 Arquivo 'dados.csv' carregado com sucesso!")
+except FileNotFoundError:
+    print("⚠️ Arquivo 'dados.csv' não encontrado. Vamos criar um novo DataFrame para demonstração.")
+    df = pd.DataFrame({
+        'Nome': ['Mariany', 'Thalyta', 'Thamires', 'Arthur', 'Nicoly'],
+        'Idade': [17, 18, 19, 17, 20],
+        'Nota': [8.5, 6.0, 9.2, 5.8, 7.5]
+    })
+
+print("\nPrimeiras linhas do DataFrame:")
+print(df.head())
+
+# 02. Criar e salvar DataFrame
+
+dados = {
+    'Nome': ['Mariany', 'Thalyta', 'Thamires', 'Arthur', 'Nicoly'],
+    'Idade': [17, 18, 19, 17, 20],
+    'Nota': [8.5, 6.0, 9.2, 5.8, 7.5]
+}
+df = pd.DataFrame(dados)
+
+df.to_csv('alunos.csv', index=False)
+print("\n💾 DataFrame criado e salvo como 'alunos.csv'.")
+
+
+# 03. Seleção de colunas
+
+print("\n🎯 Coluna 'Nome':")
+print(df['Nome'])
+
+print("\n🎯 Colunas 'Nome' e 'Nota':")
+print(df[['Nome', 'Nota']])
+
+# 04. Seleção de linhas (loc / iloc)
+
+print("\n🔎 Linha com índice 2 (usando loc):")
+print(df.loc[2])
+
+print("\n🔎 Linha na posição 0 (usando iloc):")
+print(df.iloc[0])
+
+# 05. Filtragem de dados
+
+# Filtrar alunos com nota maior que 7
+aprovados = df[df['Nota'] > 7]
+print("\n✅ Alunos aprovados (Nota > 7):")
+print(aprovados)
+
+
+# 06. Ordenação
+
+ordenado = df.sort_values(by='Nota', ascending=False)
+print("\n📊 Alunos ordenados por nota (maior para menor):")
+print(ordenado)
+
+# 07. Estatísticas básicas
+
+print("\n📈 Estatísticas básicas:")
+print(df.describe())
+
+# 08. Adicionar coluna
+
+df['Situação'] = df['Nota'].apply(lambda x: 'Aprovado' if x >= 7 else 'Reprovado')
+print("\n🆕 DataFrame com nova coluna 'Situação':")
+print(df)
+
+# 09. Atualizar dados
+
+df.loc[df['Nome'] == 'Mariany', 'Nota'] = 7.0
+
+df['Situação'] = df['Nota'].apply(lambda x: 'Aprovado' if x >= 7 else 'Reprovado')
+
+print("\n✏️ Nota do Mariany atualizada para 7.0 e situação revisada:")
+print(df[df['Nome'] == 'Mariany'])
+
+
+# 10. Exportar aprovados
+
+aprovados = df[df['Situação'] == 'Aprovado']
+aprovados.to_csv('aprovados.csv', index=False)
+
+print("\n📂 Arquivo 'aprovados.csv' exportado com sucesso!")
