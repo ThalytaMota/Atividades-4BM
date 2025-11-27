@@ -1,0 +1,23 @@
+# Função de ordenação por seleção (Selection Sort)
+def selection_sort(lista):
+    n = len(lista)
+    for i in range(n):
+        indice_minimo = i
+
+        for j in range(i + 1, n):
+            if lista[j] < lista[indice_minimo]:
+                indice_minimo = j
+
+        lista[i], lista[indice_minimo] = lista[indice_minimo], lista[i]
+
+if __name__ == "__main__":
+
+    numeros = [64, 25, 12, 22, 11]
+
+    print("Lista original:")
+    print(numeros)
+
+    selection_sort(numeros)
+
+    print("\nLista ordenada (Selection Sort):")
+    print(numeros)
