@@ -1,0 +1,19 @@
+# 3 - ORDENAÇÃO BOLHA (BUBBLE SORT)
+numeros = [45, 12, 78, 3, 56, 89, 23, 67, 10, 34,
+           5, 90, 2, 48, 73, 50, 1, 99, 25, 38]
+
+print("Lista original:", numeros)
+
+for i in range(len(numeros) - 1):
+    for j in range(len(numeros) - i - 1):
+        if numeros[j] > numeros[j + 1]:
+            numeros[j], numeros[j + 1] = numeros[j + 1], numeros[j]
+
+print("Lista em ordem crescente:", numeros)
+
+for i in range(len(numeros) - 1):
+    for j in range(len(numeros) - i - 1):
+        if numeros[j] < numeros[j + 1]:
+            numeros[j], numeros[j + 1] = numeros[j + 1], numeros[j]
+
+print("Lista em ordem decrescente:", numeros)
